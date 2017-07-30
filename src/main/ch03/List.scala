@@ -5,6 +5,13 @@ import java.util.concurrent.CompletableFuture
 import scala.annotation.tailrec
 import scala.collection.mutable.ListBuffer
 
+
+sealed trait List[+A]
+
+case object Nil extends List[Nothing]
+
+case class Cons[+A](head: A, tail: List[A]) extends List[A]
+
 /**
   * Created by siddhants on 7/29/17.
   */
@@ -71,6 +78,13 @@ object List {
     case Nil => b
     case Cons(x, xs) => f(x, foldRight(xs, b)(f))
   }
+
+
+  def foldRight[A, B](li: List[A], b: B)(f: (A, => B) => B) : B = li match {
+    case Nil => b
+    case Cons(x, xs) => f(x, foldRight(xs, b)(f))
+  }
+
 
   //ex 3.10
   def foldLeft[A,B](li: List[A], b: B)(f: (A,B) => B):B = li match {
@@ -179,6 +193,13 @@ object List {
 //  def foldLInRight[A,B](li: List[A], b: B)(f: (A,B) => B) =
 //    foldRight(li, b)((a,b) => )
 
+
+}
+
+object Main{
+
+  import main.ch03.List._
+
   def main(args: Array[String]): Unit = {
     List(1,2,3)
     println(drop(List(1,2,3,4), 8))
@@ -218,13 +239,6 @@ object List {
 
 
   }
-
 }
 
 
-
-sealed trait List[+A]
-
-case object Nil extends List[Nothing]
-
-case class Cons[+A](head: A, tail: List[A]) extends List[A]
