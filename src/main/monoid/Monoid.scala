@@ -98,9 +98,37 @@ object Monoid{
   }
 
 
+  object fizbuzz{
+
+   def stringSemiGroupMonoid = new Monoid[Option[String]] {
+     override def op(a: Option[String], b: Option[String]): Option[String] = (a,b) match {
+       case (None, _) => b
+       case (_, None) => a
+       case (Some(m1), Some(m2)) =>  Some(m1 + m2)
+     }
+
+     override def zero: Option[String] = None
+   }
+
+
+    def buildFizBuzz() = {
+      val li = List(1,2,3,4) //
+      li.map(v =>
+        List(divBy(v, 3)("fizz"), divBy(v, 5)("buzz"))
+          .reduceOption(stringSemiGroupMonoid.op).getOrElse(v.toString)
+      )
+
+    }
+
+    def divBy(dividend: Int, divisor: Int)(v: String) = dividend % divisor match {
+      case 0 => Some(v)
+      case _ => None
+    }
+
+
+  }
+
   // todo 10.11
-
-
 
   def productMonoid[A,B](A: Monoid[A], B: Monoid[B]): Monoid[(A, B)] =
     new Monoid[(A, B)] {
