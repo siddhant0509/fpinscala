@@ -15,6 +15,16 @@ object List {
     case Cons(a, tail) => a + sum(tail)
   }
 
+  def something(a: Int): Int = a match {
+    case 1 => 1
+  }
+
+
+  def onBoolean(b: Boolean): Boolean = b match {
+    case true => false
+    case false => false
+  }
+
   def product(ds: List[Double]) : Double = ds match {
     case Nil => 1.0
     case Cons(0.00, _) => 0.00
@@ -219,7 +229,11 @@ object List {
 
   }
 
+
+
 }
+
+
 
 
 

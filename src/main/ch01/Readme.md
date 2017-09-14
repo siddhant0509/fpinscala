@@ -5,7 +5,7 @@
   c. Function who do not depend on the context in which they are called
   d. Function who do not change their response with time
   
-  Functional Programmers often speak of implementing programs with a ure core and a thin layer on the outside that handles effects.
+  Functional Programmers often speak of implementing programs with a pure core and a thin layer on the outside that handles effects.
   
   If a function has to do a side effect it should not be observable from outside. For ex if a data structure of a variable is mutated noone outside the function should have a reference
   to it. If we are writing to a file, it should not be observable from outside the function by anybody

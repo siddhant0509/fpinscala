@@ -1,0 +1,2 @@
+If an expression runs forever or returns an exception instead of returning the definite value, we say that expression doesn't terminate or
+that it evaluates to the bottom. A function  is strict if it evaluates to bottom for all x which evaluates to bottom
