@@ -3,9 +3,13 @@ package main.ch03
 /**
   * Created by siddhants on 7/30/17.
   */
+trait Tree[+A]
+
+case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
+
+case class Leaf[A](value: A) extends Tree[A]
+
 object Tree {
-
-
   //ex 3.25
 
   def size[A](tree: Tree[A]): Int = tree match {
@@ -61,6 +65,14 @@ object Tree {
     case Leaf(value) => 1
   }
 
+
+}
+
+
+object Main{
+
+  import main.ch03.Tree._
+
   def main(args: Array[String]): Unit = {
     val tree = Branch(Branch(Branch(Leaf(1), Leaf(2)), Leaf(3)), Leaf(4))
     println(depth(tree))
@@ -68,12 +80,5 @@ object Tree {
     println(map(tree)(x => x * 10))
     println(maximumViaFold(tree)((x,y) => if(x >= y) 1 else -1))
   }
-
 }
 
-
-trait Tree[+A]
-
-case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
-
-case class Leaf[A](value: A) extends Tree[A]
